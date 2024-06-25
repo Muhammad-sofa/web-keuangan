@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TransactionResource\Pages;
-use App\Filament\Resources\TransactionResource\RelationManagers;
-use App\Models\Transaction;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Category;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Transaction;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TransactionResource\Pages;
+use App\Filament\Resources\TransactionResource\RelationManagers;
 
 class TransactionResource extends Resource
 {
@@ -47,23 +48,28 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('category.is_expense')
-                    ->label('Pengeluaran')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->numeric()
+                Tables\Columns\ImageColumn::make('category.image')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->description(fn (Transaction $record): string => $record->name)
+                    ->label('Name'),
+                Tables\Columns\IconColumn::make('category.is_expense')
+                    ->label('Tipe')
+                    ->trueIcon('heroicon-o-arrow-up-circle')
+                    ->falseIcon('heroicon-o-arrow-down-circle')
+                    ->trueColor('danger')
+                    ->falseColor('success')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('date')
+                    ->label('Tanggal')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('amount')
                     ->numeric()
+                    ->money('IDR', locale: 'id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('note')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('image'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
