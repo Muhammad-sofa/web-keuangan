@@ -8,7 +8,8 @@
 </p>
 
 ## Struktur Table
-![Screenshot 2024-06-25 100525](https://github.com/Muhammad-sofa/web-keuangan/assets/26114323/9315d0df-c196-4503-a1df-734937c306c2)
+![Screenshot 2024-06-25 120010](https://github.com/Muhammad-sofa/web-keuangan/assets/26114323/7c93df31-7f73-4d5c-92df-ff665dbbe42e)
+
 
 ## About Laravel
 
